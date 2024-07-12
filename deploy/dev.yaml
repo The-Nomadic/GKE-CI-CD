@@ -7,4 +7,3 @@ metadata:
 description: dev
 gke:
   cluster: projects/prj-poc-001/locations/us-central1-c/clusters/cluster-1
-

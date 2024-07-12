@@ -3,20 +3,22 @@ kind: Deployment
 metadata:
   name: my-deployment
 spec:
-  replicas: 3
+  replicas: 3  # Number of pod replicas
   selector:
     matchLabels:
-      app: my-app
+      app: my-app  # Labels to identify the pods managed by this Deployment
   template:
     metadata:
       labels:
-        app: my-app
+        app: my-app  # Labels applied to the pod templates
     spec:
       containers:
         - name: my-container
-          image: us-central1-docker.pkg.dev/prj-poc-001/gke-repo/quickstart-image
+          image: us-central1-docker.pkg.dev/prj-poc-001/gke-repo/quickstart-image  # Docker image for the container
           ports:
-            - containerPort: 8080
+            - containerPort: 8080  # Port exposed by the container
+
+---
 
 apiVersion: v1
 kind: Service
@@ -24,9 +26,9 @@ metadata:
   name: my-service
 spec:
   selector:
-    app: my-app
+    app: my-app  # Selects the pods with this label to route traffic to
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
-  type: LoadBalancer
+      port: 8080  # Service port
+      targetPort: 8080  # Container port
+  type: LoadBalancer  # Exposes the service externally using a cloud provider's load balancer

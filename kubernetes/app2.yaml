@@ -3,20 +3,20 @@ kind: Deployment
 metadata:
   name: flask-deployment
 spec:
-  replicas: 3
+  replicas: 3  # Number of pod replicas
   selector:
     matchLabels:
-      app: flask-app
+      app: flask-app  # Labels to identify the pods managed by this Deployment
   template:
     metadata:
       labels:
-        app: flask-app
+        app: flask-app  # Labels applied to the pod templates
     spec:
       containers:
         - name: flask-container
-          image: us-central1-docker.pkg.dev/prj-poc-001/gke-repo/flask-image
+          image: us-central1-docker.pkg.dev/prj-poc-001/gke-repo/flask-image  # Docker image for the container
           ports:
-            - containerPort: 8081
+            - containerPort: 8081  # Port exposed by the container
 
 ---
 
@@ -26,9 +26,9 @@ metadata:
   name: flask-service
 spec:
   selector:
-    app: flask-app
+    app: flask-app  # Selects the pods with this label to route traffic to
   ports:
     - protocol: TCP
-      port: 8081
-      targetPort: 8081
-  type: LoadBalancer
+      port: 8081  # Service port
+      targetPort: 8081  # Container port
+  type: LoadBalancer  # Exposes the service externally using a cloud provider's load balancer
