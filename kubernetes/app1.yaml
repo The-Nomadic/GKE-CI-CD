@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: my-container
-          image: us-central1-docker.pkg.dev/$PROJECT_ID/gke-repo/quickstart-image  # Docker image for the container
+          image: gcr.io/$PROJECT_ID/quickstart-image  # Docker image for the container
           ports:
             - containerPort: 8080  # Port exposed by the container
 
