@@ -6,6 +6,6 @@ metadata:
   labels: {}
 description: dev
 gke:
-  cluster: projects/$PROJECT_ID/locations/us-central1/clusters/cluster-1
+  cluster: projects/cohesive-slate-424808-m4/locations/us-central1/clusters/cluster-1
 
 
