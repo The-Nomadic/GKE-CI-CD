@@ -1,38 +1,48 @@
+docker build -t harbor.vismaya.com/cmp/cmp-backend:v15.07.24-1 -f Dockerfile .
+
+docker build -t harbor.vismaya.com/cmp/cmp-consumer:v15.07.24 -f Dockerfile .
+
+docker build -t harbor.vismaya.com/cmp/cmp-frontend:v15.07.24 -f Dockerfile .
+
 steps:
   # Build the Docker image for app1
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/$PROJECT_ID/quickstart-image', './app1']
-    id: 'Build Docker Image for app1'
+    id: 'Build Docker Image'
 
   # Push the Docker image for app1
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/quickstart-image']
-    id: 'Push Docker Image for app1'
+    id: 'Push Docker Image'
 
   # Build the Docker image for app2
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/$PROJECT_ID/flask-image', './app2']
-    id: 'Build Docker Image for app2'
+    id: 'Build Docker Image2'
 
   # Push the Docker image for app2
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/flask-image']
-    id: 'Push Docker Image for app2'
+    id: 'Push Docker Image2'
 
   # Apply deployment configurations and create a release using Google Cloud Deploy
   - name: 'google/cloud-sdk:latest'
     entrypoint: 'sh'
     args:
-      - -xe
-      - -c
-      - |
-        # Apply the deployment configurations
-        gcloud deploy apply --file deploy/pipeline.yaml --region=us-central1
-        gcloud deploy apply --file deploy/dev.yaml --region=us-central1
-        gcloud deploy apply --file deploy/prod.yaml --region=us-central1
+    - -xe
+    - -c
+    - |
+      gcloud deploy apply --file deploy/pipeline.yaml --region=us-central1
+      gcloud deploy apply --file deploy/dev.yaml --region=us-central1
+      gcloud deploy apply --file deploy/prod.yaml --region=us-central1
 
-        # Create releases for app1 and app2
-        gcloud deploy releases create 'app-release-${SHORT_SHA}' --delivery-pipeline=gke-cicd-pipeline1 --region=us-central1 --skaffold-file=skaffold.yaml
+
+      # Create releases for app1 and app2
+      gcloud deploy releases create 'app1-release-${SHORT_SHA}' --delivery-pipeline=gke-cicd-pipeline1 --region=us-central1 --from-k8s-manifest=./kubernetes/app1.yaml
+      gcloud deploy releases create 'app2-release-${SHORT_SHA}' --delivery-pipeline=gke-cicd-pipeline1 --region=us-central1 --from-k8s-manifest=./kubernetes/app2.yaml
+
 
 options:
   logging: CLOUD_LOGGING_ONLY
+
+
