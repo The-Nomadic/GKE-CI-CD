@@ -1,9 +1,3 @@
-docker build -t harbor.vismaya.com/cmp/cmp-backend:v15.07.24-1 -f Dockerfile .
-
-docker build -t harbor.vismaya.com/cmp/cmp-consumer:v15.07.24 -f Dockerfile .
-
-docker build -t harbor.vismaya.com/cmp/cmp-frontend:v15.07.24 -f Dockerfile .
-
 steps:
   # Build the Docker image for app1
   - name: 'gcr.io/cloud-builders/docker'
