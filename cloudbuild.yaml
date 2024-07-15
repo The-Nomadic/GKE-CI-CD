@@ -1,22 +1,22 @@
 steps:
   # Build the Docker image for app1
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/quickstart-image', './app1']
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/gke-repo/quickstart-image:$BUILD_ID', './app1']
     id: 'Build Docker Image'
 
   # Push the Docker image for app1
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/quickstart-image']
+    args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/gke-repo/quickstart-image:$BUILD_ID']
     id: 'Push Docker Image'
 
   # Build the Docker image for app2
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/flask-image', './app2']
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/gke-repo/flask-image:$BUILD_ID', './app2']
     id: 'Build Docker Image2'
 
   # Push the Docker image for app2
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/flask-image']
+    args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/gke-repo/flask-image:$BUILD_ID']
     id: 'Push Docker Image2'
 
   # Apply deployment configurations and create a release using Google Cloud Deploy
