@@ -7,4 +7,4 @@ metadata:
 description: prod
 requireApproval: true  # Requires manual approval before deploying
 gke:
-  cluster: projects/$PROJECT_ID/locations/us-central1/clusters/cluster-2
+  cluster: projects/$PROJECT_ID/locations/us-central1-c/clusters/cluster-2
