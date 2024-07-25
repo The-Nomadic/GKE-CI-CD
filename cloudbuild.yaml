@@ -1,19 +1,19 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/gke-repo/quickstart-image:$BUILD_ID', './app1' ]
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/quickstart-image:$BUILD_ID', './app1' ]
   id: 'Build Docker Image'
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/$PROJECT_ID/gke-repo/quickstart-image:$BUILD_ID' ]
+  args: ['push', 'gcr.io/$PROJECT_ID/quickstart-image:$BUILD_ID' ]
   id: 'Push Docker Image'
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/gke-repo/flask-image:$BUILD_ID', './app2' ]
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/flask-image:$BUILD_ID', './app2' ]
   id: 'Build Docker Image2'
 
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/$PROJECT_ID/gke-repo/flask-image:$BUILD_ID' ]
+  args: ['push', 'gcr.io/$PROJECT_ID/flask-image:$BUILD_ID' ]
   id: 'Push Docker Image2'
 
 
