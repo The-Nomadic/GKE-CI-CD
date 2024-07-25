@@ -1,16 +1,13 @@
 apiVersion: skaffold/v4beta9
 kind: Config
-
 build:
   tagPolicy:
-    gitCommit: {}  # Tag the images with the current Git commit hash
-  local: {}  # Use the local Docker daemon for building images
-
+    gitCommit: {}
+  local: {}
 manifests:
   rawYaml:
-    - ./kubernetes/*  # Specify the location of your Kubernetes manifests
-
+    - ./kubernetes/*
 deploy:
-  kubectl: {}  # Use kubectl to deploy the application
+  kubectl: {}
   logs:
-    prefix: container  # Prefix the logs with the container name
+    prefix: container

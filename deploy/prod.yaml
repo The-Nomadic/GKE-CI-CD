@@ -5,6 +5,5 @@ metadata:
   annotations: {}
   labels: {}
 description: prod
-requireApproval: true  # Requires manual approval before deploying
 gke:
-  cluster: projects/cohesive-slate-424808-m4/locations/us-central1/clusters/cluster-2
+  cluster: projects/$PROJECT_ID/locations/us-central1-c/clusters/prod-cluster
